@@ -1,57 +1,59 @@
-/* Full screen setup */
-html, body {
+body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100vh;
   background: black;
-  color: white;
-}
-
-/* Hypnotic spiral */
-#spiral {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(black 0deg 20deg, white 20deg 40deg, black 40deg 60deg, white 60deg 80deg, black 80deg 100deg, white 100deg 120deg, black 120deg 140deg, white 140deg 160deg, black 160deg 180deg, white 180deg 200deg, black 200deg 220deg, white 220deg 240deg, black 240deg 260deg, white 260deg 280deg, black 280deg 300deg, white 300deg 320deg, black 320deg 340deg, white 340deg 360deg);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: rotateSpiral 8s linear infinite;
-  z-index: -1;
-}
-
-/* Rotate animation */
-@keyframes rotateSpiral {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* Container for looping Hi text */
-#hi-container {
-  position: relative;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
 }
 
-.hi-text {
-  margin: 0.2em;
-  font-size: 3vw;
-  animation: pulse 1s infinite alternate;
+#heart-container {
+  display: flex;
+  gap: 1rem;
 }
 
-@keyframes pulse {
-  0% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
-  100% { opacity: 0.3; transform: scale(1); }
+.heart {
+  width: 50px;
+  height: 50px;
+  transform: scale(0);
+  animation: pop 0.6s forwards;
+}
+
+.red {
+  background-color: red;
+}
+
+.pink {
+  background-color: hotpink;
+}
+
+/* Heart shape using CSS */
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: inherit;
+}
+
+.heart::before {
+  top: -25px;
+  left: 0;
+}
+
+.heart::after {
+  left: 25px;
+  top: 0;
+}
+
+/* Pop animation */
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
