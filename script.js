@@ -1,24 +1,26 @@
-const container = document.getElementById('heart-container');
-const pattern = ['red', 'red', 'pink'];
-let index = 0;
-
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart', pattern[index]);
-
-    // Random position around the center
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    const angle = Math.random() * 2 * Math.PI;
-    const radius = 100 + Math.random() * 50;
-    heart.style.left = centerX + radius * Math.cos(angle) - 25 + 'px';
-    heart.style.top = centerY + radius * Math.sin(angle) - 25 + 'px';
-
-    container.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 1000);
-
-    index = (index + 1) % pattern.length;
-}
-
-setInterval(createHeart, 700);
+document.addEventListener('DOMContentLoaded', function() {
+    const heart = document.querySelector('.heart');
+    const text = document.querySelector('.heart-text');
+    
+    // Optional: Change text on click
+    heart.addEventListener('click', function() {
+        const messages = [
+            "I ❤️ You",
+            "Forever",
+            "Always",
+            "My Love",
+            "You're Amazing"
+        ];
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        text.textContent = randomMessage;
+    });
+    
+    // Optional: Pause/play animation on spacebar
+    document.addEventListener('keydown', function(e) {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            const isPaused = heart.style.animationPlayState === 'paused';
+            heart.style.animationPlayState = isPaused ? 'running' : 'paused';
+        }
+    });
+});
