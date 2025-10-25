@@ -1,8 +1,7 @@
 const container = document.getElementById('hi-container');
 
-// Calculate how many "Hi" texts we need to fill the screen
 function fillScreen() {
-    container.innerHTML = ''; // clear previous
+    container.innerHTML = '';
     const rows = Math.ceil(window.innerHeight / 50);
     const cols = Math.ceil(window.innerWidth / 100);
     for(let i = 0; i < rows * cols; i++){
