@@ -1,19 +1,20 @@
-const container = document.getElementById('hi-container');
+const container = document.getElementById('heart-container');
 
-function fillScreen() {
-    container.innerHTML = '';
-    const rows = Math.ceil(window.innerHeight / 50);
-    const cols = Math.ceil(window.innerWidth / 100);
-    for(let i = 0; i < rows * cols; i++){
-        const hi = document.createElement('div');
-        hi.classList.add('hi-text');
-        hi.textContent = i % 2 === 0 ? 'Hi' : 'HI';
-        container.appendChild(hi);
-    }
+const pattern = ['red', 'red', 'pink'];
+let index = 0;
+
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart', pattern[index]);
+    container.appendChild(heart);
+
+    // Remove after animation
+    setTimeout(() => {
+        heart.remove();
+    }, 1000);
+
+    index = (index + 1) % pattern.length;
 }
 
-// Initial fill
-fillScreen();
-
-// Update on window resize
-window.addEventListener('resize', fillScreen);
+// Spawn heart every 700ms
+setInterval(createHeart, 700);
