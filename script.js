@@ -1,20 +1,25 @@
 const container = document.getElementById('heart-container');
-
 const pattern = ['red', 'red', 'pink'];
 let index = 0;
 
 function createHeart() {
     const heart = document.createElement('div');
     heart.classList.add('heart', pattern[index]);
+
+    // Random position around the center
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    const angle = Math.random() * 2 * Math.PI;
+    const radius = 100 + Math.random() * 50; // distance from center
+    heart.style.left = centerX + radius * Math.cos(angle) - 25 + 'px';
+    heart.style.top = centerY + radius * Math.sin(angle) - 25 + 'px';
+
     container.appendChild(heart);
 
-    // Remove after animation
-    setTimeout(() => {
-        heart.remove();
-    }, 1000);
+    setTimeout(() => heart.remove(), 1000); // remove after animation
 
     index = (index + 1) % pattern.length;
 }
 
-// Spawn heart every 700ms
+// Spawn a heart every 700ms
 setInterval(createHeart, 700);
