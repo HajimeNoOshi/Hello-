@@ -1,26 +1,19 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const heart = document.querySelector('.heart');
-    const text = document.querySelector('.heart-text');
-    
-    // Optional: Change text on click
-    heart.addEventListener('click', function() {
-        const messages = [
-            "I ❤️ You",
-            "Forever",
-            "Always",
-            "My Love",
-            "You're Amazing"
-        ];
-        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-        text.textContent = randomMessage;
-    });
-    
-    // Optional: Pause/play animation on spacebar
-    document.addEventListener('keydown', function(e) {
-        if (e.code === 'Space') {
-            e.preventDefault();
-            const isPaused = heart.style.animationPlayState === 'paused';
-            heart.style.animationPlayState = isPaused ? 'running' : 'paused';
-        }
-    });
-});
+const container = document.getElementById('heart-container');
+const pattern = ['red', 'red', 'pink'];
+let index = 0;
+
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart', pattern[index]);
+    heart.textContent = '❤️';
+
+    container.appendChild(heart);
+
+    // Remove heart after animation
+    setTimeout(() => heart.remove(), 1500);
+
+    index = (index + 1) % pattern.length;
+}
+
+// Spawn heart every 0.5 seconds
+setInterval(createHeart, 500);
