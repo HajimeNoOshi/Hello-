@@ -10,16 +10,15 @@ function createHeart() {
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     const angle = Math.random() * 2 * Math.PI;
-    const radius = 100 + Math.random() * 50; // distance from center
+    const radius = 100 + Math.random() * 50;
     heart.style.left = centerX + radius * Math.cos(angle) - 25 + 'px';
     heart.style.top = centerY + radius * Math.sin(angle) - 25 + 'px';
 
     container.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 1000); // remove after animation
+    setTimeout(() => heart.remove(), 1000);
 
     index = (index + 1) % pattern.length;
 }
 
-// Spawn a heart every 700ms
 setInterval(createHeart, 700);
